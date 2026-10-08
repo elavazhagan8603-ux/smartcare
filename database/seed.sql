@@ -18,12 +18,12 @@ TRUNCATE TABLE users;
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- ----------------------------------------------------------------------------
--- 1. Users (All passwords stored as 64-character SHA-256 hashes)
+-- 1. Users (All passwords stored as 16-byte random salt + 64-character SHA-256 hashes)
 -- ----------------------------------------------------------------------------
-INSERT INTO users (id, email, password_hash, role, is_active) VALUES
-(1, 'oliver.queen@example.com', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'patient', TRUE),
-(2, 'clara.oswald@example.com', 'd4587ea9ead060c13fd994f21ecfa7926272a78854a2c20136b10a3c9e53e71e', 'patient', TRUE),
-(3, 'bruce.wayne@example.com',   'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'patient', TRUE);
+INSERT INTO users (id, email, password_salt, password_hash, role, is_active) VALUES
+(1, 'oliver.queen@example.com', 'a1b2c3d4e5f60718293a4b5c6d7e8f90', '494435d92fd71012bba17c90d86d31e21e8ff123a3bdde2c7c515d5f631518fc', 'patient', TRUE),
+(2, 'clara.oswald@example.com', 'b2c3d4e5f6a10718293a4b5c6d7e8f91', '879c7fdf91af710d32291a8f63b50e86044c04ba8c47473497672670d4b19287', 'patient', TRUE),
+(3, 'bruce.wayne@example.com',   'c3d4e5f6a1b20718293a4b5c6d7e8f92', '0d7da16bc8befb3fc6ba5b8c05e06accdc974bb23ee990a651f987a658eb5d96', 'patient', TRUE);
 
 -- ----------------------------------------------------------------------------
 -- 2. Patients Profile

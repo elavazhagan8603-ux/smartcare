@@ -21,7 +21,8 @@ USE smartcare_db;
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(150) NOT NULL UNIQUE,
-    password_hash CHAR(64) NOT NULL COMMENT 'SHA-256 64-char hexadecimal cryptographic hash',
+    password_salt VARCHAR(32) NOT NULL DEFAULT 'a1b2c3d4e5f60718293a4b5c6d7e8f90' COMMENT '16-byte random salt (32 hex characters)',
+    password_hash CHAR(64) NOT NULL COMMENT 'Salted SHA-256 64-char hexadecimal cryptographic hash',
     role ENUM('patient', 'doctor', 'admin') NOT NULL DEFAULT 'patient',
     is_active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
