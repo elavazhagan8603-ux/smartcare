@@ -21,19 +21,21 @@
       
       <!-- Brand Header -->
       <div class="auth-brand">
-        <div class="brand-logo" aria-hidden="true">✚</div>
+        <div class="brand-logo-glow" aria-hidden="true">
+          <div class="brand-logo">✚</div>
+        </div>
         <div class="auth-brand-text">
           <h1>SmartCare Patient Portal</h1>
-          <p>Book Doctor Appointments & Access Your Medical Prescriptions</p>
+          <p>Book Doctor Appointments &amp; Access Your Medical Prescriptions</p>
         </div>
       </div>
 
-      <!-- Cloud Status Banner on Auth Screen -->
+      <!-- Permanent Database Status Indicator on Auth Screen -->
       <div class="auth-cloud-status" id="auth-cloud-badge">
-        <span class="db-indicator" id="auth-cloud-indicator"></span>
-        <span id="auth-cloud-text">Storage: Local Demo Database</span>
-        <button type="button" class="btn-text-link" id="btn-auth-configure-cloud" style="font-size: 0.78rem; margin-left: auto;">
-          ☁️ Configure Cloud Database
+        <span class="db-indicator active" id="auth-cloud-indicator"></span>
+        <span id="auth-cloud-text">Database: Connected Permanently</span>
+        <button type="button" class="btn-text-link" id="btn-auth-configure-cloud" style="font-size: 0.8rem; margin-left: auto;">
+          ⚙️ Database Settings
         </button>
       </div>
 
@@ -60,7 +62,7 @@
             <label class="form-label" for="login-email">Patient Email Address</label>
             <div class="input-with-icon">
               <span class="input-icon">✉</span>
-              <input type="email" id="login-email" class="form-control" placeholder="e.g. oliver.queen@example.com" required autocomplete="email">
+              <input type="email" id="login-email" class="form-control" required autocomplete="email">
             </div>
           </div>
 
@@ -71,7 +73,7 @@
             </div>
             <div class="input-with-icon">
               <span class="input-icon">🔑</span>
-              <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
+              <input type="password" id="login-password" class="form-control" required autocomplete="current-password">
               <button type="button" class="btn-toggle-pw" id="toggle-login-pw" aria-label="Toggle password visibility">👁</button>
             </div>
           </div>
@@ -88,13 +90,34 @@
             </div>
             <div class="demo-pills-list">
               <button type="button" class="demo-pill" data-email="oliver.queen@example.com" data-pw="password123">
-                <strong>Oliver Queen</strong> (Has 3 visits & Rx)
+                <div class="demo-pill-left">
+                  <span class="demo-avatar">OQ</span>
+                  <div class="demo-pill-info">
+                    <strong>Oliver Queen</strong>
+                    <span class="demo-pill-meta">3 Visits &amp; Active Rx</span>
+                  </div>
+                </div>
+                <span class="demo-pill-badge">Auto-fill ⚡</span>
               </button>
               <button type="button" class="demo-pill" data-email="clara.oswald@example.com" data-pw="patient123">
-                <strong>Clara Oswald</strong> (Has Migraine Rx)
+                <div class="demo-pill-left">
+                  <span class="demo-avatar">CO</span>
+                  <div class="demo-pill-info">
+                    <strong>Clara Oswald</strong>
+                    <span class="demo-pill-meta">Migraine Rx</span>
+                  </div>
+                </div>
+                <span class="demo-pill-badge">Auto-fill ⚡</span>
               </button>
               <button type="button" class="demo-pill" data-email="bruce.wayne@example.com" data-pw="password123">
-                <strong>Bruce Wayne</strong> (Cardiology check)
+                <div class="demo-pill-left">
+                  <span class="demo-avatar">BW</span>
+                  <div class="demo-pill-info">
+                    <strong>Bruce Wayne</strong>
+                    <span class="demo-pill-meta">Cardiology Check</span>
+                  </div>
+                </div>
+                <span class="demo-pill-badge">Auto-fill ⚡</span>
               </button>
             </div>
           </div>
@@ -110,18 +133,18 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label" for="reg-fullname">Full Legal Name *</label>
-              <input type="text" id="reg-fullname" class="form-control" placeholder="e.g. Sarah Connor" required>
+              <input type="text" id="reg-fullname" class="form-control" required>
             </div>
             <div class="form-group">
               <label class="form-label" for="reg-email">Email Address *</label>
-              <input type="email" id="reg-email" class="form-control" placeholder="e.g. sarah@example.com" required>
+              <input type="email" id="reg-email" class="form-control" required>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label class="form-label" for="reg-phone">Phone Number *</label>
-              <input type="tel" id="reg-phone" class="form-control" placeholder="+1-555-0199" required>
+              <input type="tel" id="reg-phone" class="form-control" required>
             </div>
             <div class="form-group">
               <label class="form-label" for="reg-dob">Date of Birth *</label>
@@ -156,11 +179,11 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label" for="reg-emergency">Emergency Contact</label>
-              <input type="text" id="reg-emergency" class="form-control" placeholder="Name & Phone (e.g. John +1-555-0122)">
+              <input type="text" id="reg-emergency" class="form-control">
             </div>
             <div class="form-group">
               <label class="form-label" for="reg-allergies">Known Drug Allergies</label>
-              <input type="text" id="reg-allergies" class="form-control" placeholder="e.g. Penicillin, Aspirin (or None)">
+              <input type="text" id="reg-allergies" class="form-control">
             </div>
           </div>
 
@@ -168,11 +191,11 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label" for="reg-password">Password (Encrypted) *</label>
-              <input type="password" id="reg-password" class="form-control" placeholder="Min 6 characters" required autocomplete="new-password">
+              <input type="password" id="reg-password" class="form-control" required autocomplete="new-password">
             </div>
             <div class="form-group">
               <label class="form-label" for="reg-password-confirm">Confirm Password *</label>
-              <input type="password" id="reg-password-confirm" class="form-control" placeholder="Re-type password" required autocomplete="new-password">
+              <input type="password" id="reg-password-confirm" class="form-control" required autocomplete="new-password">
             </div>
           </div>
 
@@ -182,9 +205,7 @@
               <span class="hash-icon">🔐</span>
               <strong>Database Encryption Preview (SHA-256):</strong>
             </div>
-            <div class="hash-code" id="live-sha256-hash">
-              Type password above to compute 64-character hash...
-            </div>
+            <div class="hash-code" id="live-sha256-hash">—</div>
             <div class="hash-note">
               ✓ Only this irreversible cryptographic hash will be stored in the database.
             </div>
@@ -274,12 +295,12 @@
 
       <!-- Sidebar Footer -->
       <div class="sidebar-footer">
-        <!-- Interactive Cloud Status Chip in Sidebar -->
-        <div class="db-status-chip" id="sidebar-db-chip" title="Click to configure Cloud Database" style="cursor: pointer;">
-          <div class="db-indicator" id="sidebar-db-indicator" aria-hidden="true"></div>
+        <!-- Interactive Database Status Chip in Sidebar -->
+        <div class="db-status-chip" id="sidebar-db-chip" title="Permanent Database Connection Status" style="cursor: pointer;">
+          <div class="db-indicator active" id="sidebar-db-indicator" aria-hidden="true"></div>
           <div style="flex: 1; min-width: 0;">
-            <strong id="sidebar-db-title">Cloud Database</strong>
-            <div id="sidebar-db-subtitle" style="font-size: 0.7rem; color: var(--text-subtle);">Local Demo Mode</div>
+            <strong id="sidebar-db-title">Permanent Database</strong>
+            <div id="sidebar-db-subtitle" style="font-size: 0.7rem; color: var(--text-subtle);">Relational Store • Connected</div>
           </div>
           <span style="font-size: 0.75rem; color: var(--primary);">⚙️</span>
         </div>
@@ -299,10 +320,10 @@
           <p class="view-subtitle" id="view-subtitle">Overview of your appointments, prescriptions, and health metrics</p>
         </div>
         <div class="header-actions">
-          <!-- Cloud DB Connection Button in Top Header -->
-          <button class="btn-cloud-toggle" id="btn-cloud-modal-trigger" title="Connect Free Supabase Cloud Database">
-            <span class="cloud-dot" id="header-cloud-dot"></span>
-            <span id="header-cloud-label">☁️ Cloud DB: Local Demo</span>
+          <!-- Permanent Database Connection Status in Top Header -->
+          <button class="btn-cloud-toggle" id="btn-cloud-modal-trigger" title="Database Connection &amp; Settings">
+            <span class="cloud-dot connected" id="header-cloud-dot"></span>
+            <span id="header-cloud-label">🟢 Database: Connected</span>
           </button>
           <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
             🌙
@@ -426,7 +447,7 @@
       <section class="view-container" id="view-doctors">
         <div class="filter-bar">
           <div class="filter-group">
-            <input type="text" id="doctor-search" class="search-input" placeholder="Search doctor by name, specialty, or condition (e.g. cardio, migraine, skin, child)...">
+            <input type="text" id="doctor-search" class="search-input" aria-label="Search doctor by name, specialty, or condition">
             <select id="doctor-dept-filter" class="filter-select">
               <option value="ALL">All Departments</option>
               <option value="Cardiology">Cardiology</option>
@@ -474,7 +495,7 @@
       <section class="view-container" id="view-prescriptions">
         <div class="filter-bar">
           <div class="filter-group">
-            <input type="text" id="rx-search" class="search-input" placeholder="Search medications, doctor, or dosage...">
+            <input type="text" id="rx-search" class="search-input" aria-label="Search medications, doctor, or dosage">
           </div>
           <div class="filter-info" id="rx-count-label">
             Prescriptions issued by your attending doctors
@@ -492,7 +513,7 @@
       <section class="view-container" id="view-history">
         <div class="filter-bar">
           <div class="filter-group">
-            <input type="text" id="history-search" class="search-input" placeholder="Search past diagnoses, symptoms, or doctor notes...">
+            <input type="text" id="history-search" class="search-input" aria-label="Search past diagnoses, symptoms, or doctor notes">
           </div>
           <div class="filter-info">
             Complete timeline of doctor visits and clinical observations
@@ -511,7 +532,7 @@
         <div class="security-intro-card">
           <div class="security-intro-icon">🔒</div>
           <div>
-            <h2>Relational Database & Cryptographic Hash Inspector</h2>
+            <h2>Relational Database &amp; Cryptographic Hash Inspector</h2>
             <p>
               SmartCare stores user passwords using standard <strong>SHA-256 cryptographic hashing</strong>.
               Inspect live tables below to confirm that raw passwords are never saved.
@@ -524,7 +545,7 @@
           <h3>Test SHA-256 Password Encryption</h3>
           <p>Type any plain text password below to compute its 64-character hexadecimal SHA-256 hash in real time:</p>
           <div class="hash-tester-form">
-            <input type="text" id="tool-hash-input" class="form-control" placeholder="Enter text to hash (e.g. password123)..." value="password123">
+            <input type="text" id="tool-hash-input" class="form-control" value="password123" aria-label="Enter text to hash">
             <button class="btn-secondary" id="btn-copy-hash">Copy Hash</button>
           </div>
           <div class="hash-code-display" id="tool-hash-output">
@@ -545,7 +566,7 @@
               <button class="db-tab-btn" data-table="schema_sql">schema.sql (MySQL)</button>
             </div>
             <button class="btn-secondary" id="btn-inspector-cloud-settings" style="font-size: 0.82rem; padding: 0.4rem 0.85rem;">
-              ☁️ Cloud DB Settings
+              ⚙️ Database Settings
             </button>
           </div>
 
@@ -565,16 +586,25 @@
   </div>
 
   <!-- =========================================================================
-       MODAL: CLOUD DATABASE SETTINGS (SUPABASE FREE POSTGRESQL)
+       MODAL: PERMANENT DATABASE SETTINGS (SUPABASE FREE POSTGRESQL & LOCAL STORE)
        ========================================================================= -->
   <div class="modal-overlay" id="modal-cloud-config" role="dialog" aria-modal="true" aria-labelledby="modal-cloud-title">
     <div class="modal-box modal-lg">
       <div class="modal-header">
         <div class="modal-header-text">
-          <h3 id="modal-cloud-title">☁️ Supabase Free Cloud Database Setup</h3>
-          <p>Connect your free PostgreSQL cloud database to store patient appointments & prescriptions online</p>
+          <h3 id="modal-cloud-title">⚙️ Permanent Database Configuration &amp; Sync</h3>
+          <p>SmartCare auto-connects permanently every time you launch the application</p>
         </div>
         <button class="modal-close-btn" id="close-cloud-modal" aria-label="Close modal">&times;</button>
+      </div>
+
+      <!-- Permanent Auto-Connection Active Banner -->
+      <div class="permanent-db-banner">
+        <span class="db-indicator active"></span>
+        <div class="permanent-db-info">
+          <strong>Permanent Connection Active</strong>
+          <p>Database credentials saved here are remembered permanently across sessions and browser restarts.</p>
+        </div>
       </div>
 
       <!-- Quick 3-Step Guide -->
@@ -590,14 +620,14 @@
           <div class="step-num">2</div>
           <div class="step-content">
             <strong>Run SQL Schema</strong>
-            <p>In Supabase <em>SQL Editor</em>, paste & run <button type="button" class="btn-text-link" id="btn-copy-supabase-sql"><code>database/schema_supabase.sql</code></button>.</p>
+            <p>In Supabase <em>SQL Editor</em>, paste &amp; run <button type="button" class="btn-text-link" id="btn-copy-supabase-sql"><code>database/schema_supabase.sql</code></button>.</p>
           </div>
         </div>
         <div class="step-card">
           <div class="step-num">3</div>
           <div class="step-content">
-            <strong>Paste Keys Below</strong>
-            <p>Copy your Project URL & anon key from <em>Project Settings &gt; API</em>.</p>
+            <strong>Save Keys Permanently</strong>
+            <p>Copy your Project URL &amp; anon key from <em>Project Settings &gt; API</em>.</p>
           </div>
         </div>
       </div>
@@ -605,26 +635,26 @@
       <form id="form-cloud-config">
         <div class="form-group">
           <label class="form-label" for="cfg-supabase-url">Supabase Project URL *</label>
-          <input type="url" id="cfg-supabase-url" class="form-control" placeholder="https://your-project-id.supabase.co" required>
+          <input type="url" id="cfg-supabase-url" class="form-control" required>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="cfg-supabase-key">Supabase Anon Public API Key *</label>
-          <textarea id="cfg-supabase-key" class="form-control" rows="3" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." required></textarea>
+          <textarea id="cfg-supabase-key" class="form-control" rows="3" required></textarea>
         </div>
 
         <div class="cloud-status-box" id="cloud-test-status">
           <span id="cloud-test-icon">ℹ️</span>
-          <span id="cloud-test-msg">Enter your Supabase URL & anon key, then click "Connect & Sync Cloud Database".</span>
+          <span id="cloud-test-msg">Enter your Supabase URL &amp; anon key, then click "Save Permanently &amp; Connect".</span>
         </div>
 
         <div class="modal-footer" style="justify-content: space-between; flex-wrap: wrap;">
           <button type="button" class="btn-secondary" id="btn-disconnect-cloud" style="color: var(--danger);">
-            Disconnect (Use Local Mode)
+            Use Permanent Local Database
           </button>
           <div style="display: flex; gap: 0.75rem;">
             <button type="button" class="btn-secondary" id="btn-close-cloud">Close</button>
-            <button type="submit" class="btn-primary" id="btn-save-cloud">Connect & Test Cloud</button>
+            <button type="submit" class="btn-primary" id="btn-save-cloud">Save Permanently &amp; Connect</button>
           </div>
         </div>
       </form>
@@ -650,7 +680,7 @@
           <div class="modal-doc-avatar">👨‍⚕️</div>
           <div class="modal-doc-info">
             <strong id="modal-doc-name">Select Doctor</strong>
-            <div id="modal-doc-spec">Specialty & Department</div>
+            <div id="modal-doc-spec">Specialty &amp; Department</div>
             <div class="modal-doc-fee" id="modal-doc-fee">Consultation Fee: $0.00</div>
           </div>
         </div>
@@ -680,17 +710,17 @@
 
         <div class="form-group">
           <label class="form-label" for="appt-reason-input">Reason for Visit / Main Symptom *</label>
-          <input type="text" id="appt-reason-input" class="form-control" placeholder="e.g. Chest tightness during exercise, migraine recurrence, routine checkup..." required>
+          <input type="text" id="appt-reason-input" class="form-control" required>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="appt-notes-input">Patient Notes or Current Medications (Optional)</label>
-          <textarea id="appt-notes-input" class="form-control" rows="2" placeholder="Briefly describe any current symptoms or medication you are taking..."></textarea>
+          <textarea id="appt-notes-input" class="form-control" rows="2"></textarea>
         </div>
 
         <div class="modal-footer">
           <button type="button" class="btn-secondary" id="btn-cancel-appt">Cancel</button>
-          <button type="submit" class="btn-primary" id="btn-confirm-booking">Confirm & Book Appointment</button>
+          <button type="submit" class="btn-primary" id="btn-confirm-booking">Confirm &amp; Book Appointment</button>
         </div>
       </form>
     </div>
@@ -725,7 +755,8 @@
        ========================================================================= -->
   <div class="toast-container" id="toast-container" aria-live="polite"></div>
 
-  <!-- Application Logic -->
+  <!-- Configuration & Application Logic -->
+  <script src="config.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

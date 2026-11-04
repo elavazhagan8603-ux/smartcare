@@ -39,11 +39,17 @@ It supports **both a 100% Free Cloud Database ([Supabase PostgreSQL](https://sup
    - **Project URL** (e.g., `https://abcdefghijklm.supabase.co`)
    - **Project API Key** (the **`anon public`** key)
 
-### Step 4: Connect Inside SmartCare
-1. Open [`index.html`](file:///c:/Users/ASUS/.gemini/antigravity-ide/scratch/smartcare/index.html) in your browser.
-2. Click **☁️ Configure Cloud Database** on the sign-in screen, or **☁️ Cloud DB** in the top navigation header.
-3. Paste your **Supabase URL** and **Anon API Key**, then click **Connect & Test Cloud**.
-4. The status turns to 🟢 **Connected to Supabase Cloud PostgreSQL!** and all appointments, patients, and prescriptions now sync to the cloud in real time!
+### Step 4: Connect Permanently Inside SmartCare
+SmartCare supports **100% permanent database connection** — you never have to re-configure it every time you open the app! Choose either method:
+
+- **Method A (Code Configuration in `config.js`):**
+  Open [`config.js`](file:///c:/Users/ASUS/.gemini/antigravity-ide/scratch/smartcare/config.js) and paste your Supabase URL and anon key into `SMARTCARE_CONFIG.database`. SmartCare will permanently auto-connect to your cloud database whenever launched.
+
+- **Method B (UI Settings Panel):**
+  1. Open [`index.html`](file:///c:/Users/ASUS/.gemini/antigravity-ide/scratch/smartcare/index.html) in your browser.
+  2. Click **⚙️ Database Settings** on the sign-in screen or the top header status badge.
+  3. Paste your **Supabase URL** and **Anon API Key**, then click **Save Permanently & Connect**.
+  4. Your credentials are permanently saved in persistent storage and auto-connected on boot!
 
 ---
 
@@ -52,9 +58,10 @@ It supports **both a 100% Free Cloud Database ([Supabase PostgreSQL](https://sup
 ```text
 smartcare/
 │
-├── 📄 index.html                # Patient Portal Application (Auth, Dashboard, Booking, Rx, Cloud Modal)
-├── 🎨 styles.css                # Healthcare UI Design System (Light/Dark themes, Cloud Status pills)
-├── ⚡ app.js                    # Cryptographic SHA-256 Engine, Supabase Cloud SDK & UI Controller
+├── 📄 index.html                # Patient Portal Application (Auth, Dashboard, Booking, Rx, Modals)
+├── ⚙️ config.js                # Permanent Database & System Configuration
+├── 🎨 styles.css                # Modern Healthcare Design System & Clinical UI
+├── ⚡ app.js                    # Cryptographic SHA-256 Engine, Cloud SDK & Permanent Controller
 │
 ├── 📁 database/
 │   ├── schema_supabase.sql     # ☁️ PostgreSQL Cloud DDL & Seed for Supabase (RLS enabled)
