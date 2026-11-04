@@ -40,10 +40,10 @@
       <div class="auth-card">
         <!-- Auth Tabs: Login vs Register -->
         <div class="auth-tabs" role="tablist">
-          <button class="auth-tab-btn active" id="tab-btn-login" role="tab" aria-selected="true">
+          <button type="button" class="auth-tab-btn active" id="tab-btn-login" role="tab" aria-selected="true" onclick="window.smartCareApp && window.smartCareApp.switchAuthTab('login')">
             <span>Sign In</span>
           </button>
-          <button class="auth-tab-btn" id="tab-btn-register" role="tab" aria-selected="false">
+          <button type="button" class="auth-tab-btn" id="tab-btn-register" role="tab" aria-selected="false" onclick="window.smartCareApp && window.smartCareApp.switchAuthTab('register')">
             <span>New Patient Registration</span>
           </button>
         </div>
@@ -117,6 +117,11 @@
                 <span class="demo-pill-badge">Auto-fill ⚡</span>
               </button>
             </div>
+          </div>
+
+          <div class="auth-switch-prompt" style="text-align: center; margin-top: 1.25rem; padding-top: 0.85rem; border-top: 1px dashed var(--border-color, #e2e8f0);">
+            <span style="color: var(--text-muted); font-size: 0.9rem;">Need to register? </span>
+            <button type="button" class="btn-link" onclick="window.smartCareApp && window.smartCareApp.switchAuthTab('register')" style="color: var(--primary); font-weight: 600; font-size: 0.9rem; background: none; border: none; cursor: pointer; text-decoration: underline;">Create New Patient Account &rarr;</button>
           </div>
         </form>
 
@@ -212,6 +217,11 @@
             <span>Complete Registration & Sign In</span>
             <span class="btn-arrow">→</span>
           </button>
+
+          <div class="auth-switch-prompt" style="text-align: center; margin-top: 1.25rem; padding-top: 0.85rem; border-top: 1px dashed var(--border-color, #e2e8f0);">
+            <span style="color: var(--text-muted); font-size: 0.9rem;">Already registered? </span>
+            <button type="button" class="btn-link" onclick="window.smartCareApp && window.smartCareApp.switchAuthTab('login')" style="color: var(--primary); font-weight: 600; font-size: 0.9rem; background: none; border: none; cursor: pointer; text-decoration: underline;">Sign In to Patient Portal &rarr;</button>
+          </div>
         </form>
 
       </div>

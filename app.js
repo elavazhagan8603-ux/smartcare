@@ -678,22 +678,6 @@ class SmartCarePatientApp {
     }
   }
 
-    // Copy Supabase SQL schema button
-    const copySqlBtn = document.getElementById('btn-copy-supabase-sql');
-    if (copySqlBtn) {
-      copySqlBtn.addEventListener('click', () => {
-        window.open('database/schema_supabase.sql', '_blank');
-      });
-    }
-
-    const viewSupabaseSqlBtn = document.getElementById('btn-view-supabase-sql');
-    if (viewSupabaseSqlBtn) {
-      viewSupabaseSqlBtn.addEventListener('click', () => {
-        window.open('database/schema_supabase.sql', '_blank');
-      });
-    }
-  }
-
   // --------------------------------------------------------------------------
   // Theme Management
   // --------------------------------------------------------------------------
@@ -724,29 +708,62 @@ class SmartCarePatientApp {
   // --------------------------------------------------------------------------
   // Authentication & Registration Logic
   // --------------------------------------------------------------------------
+  switchAuthTab(tab) {
+    const tabLogin = document.getElementById('tab-btn-login');
+    const tabRegister = document.getElementById('tab-btn-register');
+    const formLogin = document.getElementById('form-patient-login');
+    const formRegister = document.getElementById('form-patient-register');
+
+    if (tab === 'register') {
+      if (tabRegister) {
+        tabRegister.classList.add('active');
+        tabRegister.setAttribute('aria-selected', 'true');
+      }
+      if (tabLogin) {
+        tabLogin.classList.remove('active');
+        tabLogin.setAttribute('aria-selected', 'false');
+      }
+      if (formRegister) {
+        formRegister.classList.add('active');
+      }
+      if (formLogin) {
+        formLogin.classList.remove('active');
+      }
+    } else {
+      if (tabLogin) {
+        tabLogin.classList.add('active');
+        tabLogin.setAttribute('aria-selected', 'true');
+      }
+      if (tabRegister) {
+        tabRegister.classList.remove('active');
+        tabRegister.setAttribute('aria-selected', 'false');
+      }
+      if (formLogin) {
+        formLogin.classList.add('active');
+      }
+      if (formRegister) {
+        formRegister.classList.remove('active');
+      }
+    }
+  }
+
   setupAuthEventListeners() {
     const tabLogin = document.getElementById('tab-btn-login');
     const tabRegister = document.getElementById('tab-btn-register');
     const formLogin = document.getElementById('form-patient-login');
     const formRegister = document.getElementById('form-patient-register');
 
-    if (tabLogin && tabRegister) {
-      tabLogin.addEventListener('click', () => {
-        tabLogin.classList.add('active');
-        tabLogin.setAttribute('aria-selected', 'true');
-        tabRegister.classList.remove('active');
-        tabRegister.setAttribute('aria-selected', 'false');
-        formLogin.classList.add('active');
-        formRegister.classList.remove('active');
+    if (tabLogin) {
+      tabLogin.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.switchAuthTab('login');
       });
+    }
 
-      tabRegister.addEventListener('click', () => {
-        tabRegister.classList.add('active');
-        tabRegister.setAttribute('aria-selected', 'true');
-        tabLogin.classList.remove('active');
-        tabLogin.setAttribute('aria-selected', 'false');
-        formRegister.classList.add('active');
-        formLogin.classList.remove('active');
+    if (tabRegister) {
+      tabRegister.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.switchAuthTab('register');
       });
     }
 
