@@ -5,9 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="SmartCare - Patient Appointment Booking, Clinical Prescriptions & Medical History Portal with Secure Cryptographic Password Hashing and Free Cloud Database (Supabase PostgreSQL).">
   <title>SmartCare | Patient Appointment & Medical History Portal</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261104-3">
   <!-- Supabase Cloud Database Client SDK (Free Cloud PostgreSQL) -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    function forceSwitchAuthTab(tab) {
+      var tabLogin = document.getElementById('tab-btn-login');
+      var tabRegister = document.getElementById('tab-btn-register');
+      var formLogin = document.getElementById('form-patient-login');
+      var formRegister = document.getElementById('form-patient-register');
+      if (tab === 'register') {
+        if (tabRegister) { tabRegister.classList.add('active'); tabRegister.setAttribute('aria-selected', 'true'); }
+        if (tabLogin) { tabLogin.classList.remove('active'); tabLogin.setAttribute('aria-selected', 'false'); }
+        if (formRegister) { formRegister.classList.add('active'); }
+        if (formLogin) { formLogin.classList.remove('active'); }
+      } else {
+        if (tabLogin) { tabLogin.classList.add('active'); tabLogin.setAttribute('aria-selected', 'true'); }
+        if (tabRegister) { tabRegister.classList.remove('active'); tabRegister.setAttribute('aria-selected', 'false'); }
+        if (formLogin) { formLogin.classList.add('active'); }
+        if (formRegister) { formRegister.classList.remove('active'); }
+      }
+    }
+  </script>
 </head>
 <body>
 
@@ -40,10 +59,10 @@
       <div class="auth-card">
         <!-- Auth Tabs: Login vs Register -->
         <div class="auth-tabs" role="tablist">
-          <button type="button" class="auth-tab-btn active" id="tab-btn-login" role="tab" aria-selected="true" onclick="window.smartCareApp && window.smartCareApp.switchAuthTab('login')">
+          <button type="button" class="auth-tab-btn active" id="tab-btn-login" role="tab" aria-selected="true" onclick="forceSwitchAuthTab('login'); window.smartCareApp && window.smartCareApp.switchAuthTab('login');">
             <span>Sign In</span>
           </button>
-          <button type="button" class="auth-tab-btn" id="tab-btn-register" role="tab" aria-selected="false" onclick="window.smartCareApp && window.smartCareApp.switchAuthTab('register')">
+          <button type="button" class="auth-tab-btn" id="tab-btn-register" role="tab" aria-selected="false" onclick="forceSwitchAuthTab('register'); window.smartCareApp && window.smartCareApp.switchAuthTab('register');">
             <span>New Patient Registration</span>
           </button>
         </div>
@@ -121,7 +140,7 @@
 
           <div class="auth-switch-prompt" style="text-align: center; margin-top: 1.25rem; padding-top: 0.85rem; border-top: 1px dashed var(--border-color, #e2e8f0);">
             <span style="color: var(--text-muted); font-size: 0.9rem;">Need to register? </span>
-            <button type="button" class="btn-link" onclick="window.smartCareApp && window.smartCareApp.switchAuthTab('register')" style="color: var(--primary); font-weight: 600; font-size: 0.9rem; background: none; border: none; cursor: pointer; text-decoration: underline;">Create New Patient Account &rarr;</button>
+            <button type="button" class="btn-link" onclick="forceSwitchAuthTab('register'); window.smartCareApp && window.smartCareApp.switchAuthTab('register');" style="color: var(--primary); font-weight: 600; font-size: 0.9rem; background: none; border: none; cursor: pointer; text-decoration: underline;">Create New Patient Account &rarr;</button>
           </div>
         </form>
 
@@ -220,7 +239,7 @@
 
           <div class="auth-switch-prompt" style="text-align: center; margin-top: 1.25rem; padding-top: 0.85rem; border-top: 1px dashed var(--border-color, #e2e8f0);">
             <span style="color: var(--text-muted); font-size: 0.9rem;">Already registered? </span>
-            <button type="button" class="btn-link" onclick="window.smartCareApp && window.smartCareApp.switchAuthTab('login')" style="color: var(--primary); font-weight: 600; font-size: 0.9rem; background: none; border: none; cursor: pointer; text-decoration: underline;">Sign In to Patient Portal &rarr;</button>
+            <button type="button" class="btn-link" onclick="forceSwitchAuthTab('login'); window.smartCareApp && window.smartCareApp.switchAuthTab('login');" style="color: var(--primary); font-weight: 600; font-size: 0.9rem; background: none; border: none; cursor: pointer; text-decoration: underline;">Sign In to Patient Portal &rarr;</button>
           </div>
         </form>
 
@@ -682,8 +701,8 @@
        ========================================================================= -->
   <div class="toast-container" id="toast-container" aria-live="polite"></div>
 
-  <!-- Configuration & Application Logic -->
-  <script src="config.js"></script>
-  <script src="app.js"></script>
+  <!-- Configuration & Application Logic (with cache-busting version query) -->
+  <script src="config.js?v=20261104-3"></script>
+  <script src="app.js?v=20261104-3"></script>
 </body>
 </html>
