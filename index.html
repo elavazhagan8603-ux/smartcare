@@ -33,10 +33,7 @@
       <!-- Permanent Database Status Indicator on Auth Screen -->
       <div class="auth-cloud-status" id="auth-cloud-badge">
         <span class="db-indicator active" id="auth-cloud-indicator"></span>
-        <span id="auth-cloud-text">Database: Connected Permanently</span>
-        <button type="button" class="btn-text-link" id="btn-auth-configure-cloud" style="font-size: 0.8rem; margin-left: auto;">
-          ⚙️ Database Settings
-        </button>
+        <span id="auth-cloud-text">Database: Connected &amp; Synced</span>
       </div>
 
       <!-- Auth Card Container -->
@@ -295,14 +292,13 @@
 
       <!-- Sidebar Footer -->
       <div class="sidebar-footer">
-        <!-- Interactive Database Status Chip in Sidebar -->
-        <div class="db-status-chip" id="sidebar-db-chip" title="Permanent Database Connection Status" style="cursor: pointer;">
+        <!-- Database Status Chip in Sidebar -->
+        <div class="db-status-chip" id="sidebar-db-chip">
           <div class="db-indicator active" id="sidebar-db-indicator" aria-hidden="true"></div>
           <div style="flex: 1; min-width: 0;">
-            <strong id="sidebar-db-title">Permanent Database</strong>
-            <div id="sidebar-db-subtitle" style="font-size: 0.7rem; color: var(--text-subtle);">Relational Store • Connected</div>
+            <strong id="sidebar-db-title">Database Connected</strong>
+            <div id="sidebar-db-subtitle" style="font-size: 0.7rem; color: var(--text-subtle);">Relational Store • Active &amp; Synced</div>
           </div>
-          <span style="font-size: 0.75rem; color: var(--primary);">⚙️</span>
         </div>
 
         <button class="btn-logout" id="btn-logout">
@@ -321,10 +317,10 @@
         </div>
         <div class="header-actions">
           <!-- Permanent Database Connection Status in Top Header -->
-          <button class="btn-cloud-toggle" id="btn-cloud-modal-trigger" title="Database Connection &amp; Settings">
+          <div class="btn-cloud-toggle" id="header-cloud-badge" style="cursor: default;">
             <span class="cloud-dot connected" id="header-cloud-dot"></span>
             <span id="header-cloud-label">🟢 Database: Connected</span>
-          </button>
+          </div>
           <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
             🌙
           </button>
@@ -565,9 +561,6 @@
               <button class="db-tab-btn" data-table="schema_supabase">schema_supabase.sql</button>
               <button class="db-tab-btn" data-table="schema_sql">schema.sql (MySQL)</button>
             </div>
-            <button class="btn-secondary" id="btn-inspector-cloud-settings" style="font-size: 0.82rem; padding: 0.4rem 0.85rem;">
-              ⚙️ Database Settings
-            </button>
           </div>
 
           <div class="code-panel" id="db-inspector-output">
@@ -583,82 +576,6 @@
       </section>
 
     </main>
-  </div>
-
-  <!-- =========================================================================
-       MODAL: PERMANENT DATABASE SETTINGS (SUPABASE FREE POSTGRESQL & LOCAL STORE)
-       ========================================================================= -->
-  <div class="modal-overlay" id="modal-cloud-config" role="dialog" aria-modal="true" aria-labelledby="modal-cloud-title">
-    <div class="modal-box modal-lg">
-      <div class="modal-header">
-        <div class="modal-header-text">
-          <h3 id="modal-cloud-title">⚙️ Permanent Database Configuration &amp; Sync</h3>
-          <p>SmartCare auto-connects permanently every time you launch the application</p>
-        </div>
-        <button class="modal-close-btn" id="close-cloud-modal" aria-label="Close modal">&times;</button>
-      </div>
-
-      <!-- Permanent Auto-Connection Active Banner -->
-      <div class="permanent-db-banner">
-        <span class="db-indicator active"></span>
-        <div class="permanent-db-info">
-          <strong>Permanent Connection Active</strong>
-          <p>Database credentials saved here are remembered permanently across sessions and browser restarts.</p>
-        </div>
-      </div>
-
-      <!-- Quick 3-Step Guide -->
-      <div class="cloud-steps-banner">
-        <div class="step-card">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <strong>Sign Up Free</strong>
-            <p>Visit <a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a> and create a free project in 30 seconds.</p>
-          </div>
-        </div>
-        <div class="step-card">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <strong>Run SQL Schema</strong>
-            <p>In Supabase <em>SQL Editor</em>, paste &amp; run <button type="button" class="btn-text-link" id="btn-copy-supabase-sql"><code>database/schema_supabase.sql</code></button>.</p>
-          </div>
-        </div>
-        <div class="step-card">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <strong>Save Keys Permanently</strong>
-            <p>Copy your Project URL &amp; anon key from <em>Project Settings &gt; API</em>.</p>
-          </div>
-        </div>
-      </div>
-
-      <form id="form-cloud-config">
-        <div class="form-group">
-          <label class="form-label" for="cfg-supabase-url">Supabase Project URL *</label>
-          <input type="url" id="cfg-supabase-url" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="cfg-supabase-key">Supabase Anon Public API Key *</label>
-          <textarea id="cfg-supabase-key" class="form-control" rows="3" required></textarea>
-        </div>
-
-        <div class="cloud-status-box" id="cloud-test-status">
-          <span id="cloud-test-icon">ℹ️</span>
-          <span id="cloud-test-msg">Enter your Supabase URL &amp; anon key, then click "Save Permanently &amp; Connect".</span>
-        </div>
-
-        <div class="modal-footer" style="justify-content: space-between; flex-wrap: wrap;">
-          <button type="button" class="btn-secondary" id="btn-disconnect-cloud" style="color: var(--danger);">
-            Use Permanent Local Database
-          </button>
-          <div style="display: flex; gap: 0.75rem;">
-            <button type="button" class="btn-secondary" id="btn-close-cloud">Close</button>
-            <button type="submit" class="btn-primary" id="btn-save-cloud">Save Permanently &amp; Connect</button>
-          </div>
-        </div>
-      </form>
-    </div>
   </div>
 
   <!-- =========================================================================

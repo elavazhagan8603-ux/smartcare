@@ -617,27 +617,27 @@ class SmartCarePatientApp {
     const authIndicator = document.getElementById('auth-cloud-indicator');
     if (authText && authIndicator) {
       if (this.isCloudConnected) {
-        authText.textContent = 'Storage: ☁️ Supabase Cloud (Live PostgreSQL • Permanent)';
+        authText.textContent = 'Database: ☁️ Supabase Cloud (Live PostgreSQL)';
         authIndicator.style.backgroundColor = 'var(--success)';
         authIndicator.style.boxShadow = '0 0 10px rgba(16, 185, 129, 0.85)';
         authIndicator.classList.add('active');
       } else {
-        authText.textContent = 'Storage: 🟢 Permanent Relational Database (Connected)';
+        authText.textContent = 'Database: 🟢 Connected & Synced';
         authIndicator.style.backgroundColor = 'var(--success)';
         authIndicator.style.boxShadow = '0 0 10px rgba(16, 185, 129, 0.85)';
         authIndicator.classList.add('active');
       }
     }
 
-    // 2. Header Database Status Button
+    // 2. Header Database Status Badge
     const headerLabel = document.getElementById('header-cloud-label');
     const headerDot = document.getElementById('header-cloud-dot');
     if (headerLabel && headerDot) {
       if (this.isCloudConnected) {
-        headerLabel.textContent = '☁️ Cloud DB: Connected (Permanent)';
+        headerLabel.textContent = '☁️ Supabase Cloud: Connected';
         headerDot.className = 'cloud-dot connected';
       } else {
-        headerLabel.textContent = '🟢 Database: Connected (Permanent)';
+        headerLabel.textContent = '🟢 Database: Connected';
         headerDot.className = 'cloud-dot connected';
       }
     }
@@ -649,12 +649,12 @@ class SmartCarePatientApp {
     if (sbTitle && sbSub && sbInd) {
       if (this.isCloudConnected) {
         sbTitle.textContent = 'Supabase Cloud';
-        sbSub.textContent = 'PostgreSQL • Permanent Live';
+        sbSub.textContent = 'PostgreSQL • Live Synced';
         sbInd.style.backgroundColor = 'var(--success)';
         sbInd.classList.add('active');
       } else {
-        sbTitle.textContent = 'Permanent Database';
-        sbSub.textContent = 'Relational Store • Connected';
+        sbTitle.textContent = 'Database Connected';
+        sbSub.textContent = 'Relational Store • Active & Synced';
         sbInd.style.backgroundColor = 'var(--success)';
         sbInd.classList.add('active');
       }
@@ -662,122 +662,21 @@ class SmartCarePatientApp {
   }
 
   setupCloudSettings() {
-    const modal = document.getElementById('modal-cloud-config');
-    const form = document.getElementById('form-cloud-config');
-    const urlInput = document.getElementById('cfg-supabase-url');
-    const keyInput = document.getElementById('cfg-supabase-key');
-    const statusBox = document.getElementById('cloud-test-status');
-    const statusMsg = document.getElementById('cloud-test-msg');
-    const statusIcon = document.getElementById('cloud-test-icon');
-    const btnDisconnect = document.getElementById('btn-disconnect-cloud');
-    const btnClose = document.getElementById('btn-close-cloud');
-    const btnCloseX = document.getElementById('close-cloud-modal');
-
-    const openCloudModal = () => {
-      const cfg = CloudDatabaseManager.getConfig();
-      if (cfg) {
-        if (urlInput) urlInput.value = cfg.url || '';
-        if (keyInput) keyInput.value = cfg.key || '';
-      }
-      if (statusBox && statusMsg && statusIcon) {
-        if (this.isCloudConnected) {
-          statusBox.className = 'cloud-status-box connected';
-          statusIcon.textContent = '✅';
-          statusMsg.textContent = 'Connected to Supabase Cloud PostgreSQL database permanently.';
-        } else {
-          statusBox.className = 'cloud-status-box connected';
-          statusIcon.textContent = '🟢';
-          statusMsg.textContent = 'Connected to Permanent Relational Local Database. All data persists.';
-        }
-      }
-      if (modal) modal.classList.add('active');
-    };
-
-    const closeCloudModal = () => {
-      if (modal) modal.classList.remove('active');
-    };
-
-    // Modal Triggers
-    const triggerHeader = document.getElementById('btn-cloud-modal-trigger');
-    const triggerSidebar = document.getElementById('sidebar-db-chip');
-    const triggerAuth = document.getElementById('btn-auth-configure-cloud');
-    const triggerInspector = document.getElementById('btn-inspector-cloud-settings');
-
-    if (triggerHeader) triggerHeader.addEventListener('click', openCloudModal);
-    if (triggerSidebar) triggerSidebar.addEventListener('click', openCloudModal);
-    if (triggerAuth) triggerAuth.addEventListener('click', openCloudModal);
-    if (triggerInspector) triggerInspector.addEventListener('click', openCloudModal);
-
-    if (btnClose) btnClose.addEventListener('click', closeCloudModal);
-    if (btnCloseX) btnCloseX.addEventListener('click', closeCloudModal);
-
-    // Form Submission: Test & Save Cloud Connection
-    if (form) {
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const url = urlInput.value.trim();
-        const key = keyInput.value.trim();
-
-        if (!url || !key) {
-          this.showToast('Please provide both Supabase URL and anon API key.', 'danger');
-          return;
-        }
-
-        if (statusBox && statusMsg && statusIcon) {
-          statusBox.className = 'cloud-status-box';
-          statusIcon.textContent = '⏳';
-          statusMsg.textContent = 'Connecting and testing database connection...';
-        }
-
-        try {
-          const client = await CloudDatabaseManager.testConnection(url, key);
-          CloudDatabaseManager.saveConfig(url, key);
-          this.supabaseClient = client;
-          this.isCloudConnected = true;
-
-          // Pull tables from cloud
-          await this.loadAllFromCloud();
-
-          if (statusBox && statusMsg && statusIcon) {
-            statusBox.className = 'cloud-status-box connected';
-            statusIcon.textContent = '✅';
-            statusMsg.textContent = 'Successfully saved and permanently connected to Supabase Cloud PostgreSQL!';
-          }
-
-          this.updateCloudUI();
-          this.showToast('Database configuration saved permanently!', 'success');
-          this.renderAllViews();
-
-          setTimeout(closeCloudModal, 1200);
-        } catch (err) {
-          console.error(err);
-          if (statusBox && statusMsg && statusIcon) {
-            statusBox.className = 'cloud-status-box error';
-            statusIcon.textContent = '❌';
-            statusMsg.textContent = `Connection failed: ${err.message || 'Make sure tables exist and credentials are valid.'}`;
-          }
-          this.showToast('Failed to connect to Supabase. Check credentials.', 'danger');
-        }
+    // Schema script view buttons in Database Inspector
+    const copySqlBtn = document.getElementById('btn-copy-supabase-sql');
+    if (copySqlBtn) {
+      copySqlBtn.addEventListener('click', () => {
+        window.open('database/schema_supabase.sql', '_blank');
       });
     }
 
-    // Disconnect Cloud Button -> Switch to Permanent Local Mode
-    if (btnDisconnect) {
-      btnDisconnect.addEventListener('click', () => {
-        CloudDatabaseManager.removeConfig();
-        this.supabaseClient = null;
-        this.isCloudConnected = false;
-        this.updateCloudUI();
-        if (urlInput) urlInput.value = '';
-        if (keyInput) keyInput.value = '';
-        if (statusBox && statusMsg && statusIcon) {
-          statusBox.className = 'cloud-status-box connected';
-          statusIcon.textContent = '🟢';
-          statusMsg.textContent = 'Switched to Permanent Local Relational Database. All records remain saved.';
-        }
-        this.showToast('Using Permanent Local Database.', 'info');
+    const viewSupabaseSqlBtn = document.getElementById('btn-view-supabase-sql');
+    if (viewSupabaseSqlBtn) {
+      viewSupabaseSqlBtn.addEventListener('click', () => {
+        window.open('database/schema_supabase.sql', '_blank');
       });
     }
+  }
 
     // Copy Supabase SQL schema button
     const copySqlBtn = document.getElementById('btn-copy-supabase-sql');

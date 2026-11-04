@@ -2313,14 +2313,9 @@ body {
   font-family: var(--font-sans);
   font-size: 0.82rem;
   font-weight: 700;
-  cursor: pointer;
+  cursor: default;
+  user-select: none;
   transition: var(--transition);
-}
-
-.btn-cloud-toggle:hover {
-  background: var(--bg-surface-elevated);
-  border-color: var(--primary);
-  color: var(--primary);
 }
 
 .cloud-dot {
